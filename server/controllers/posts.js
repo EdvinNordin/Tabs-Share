@@ -1,9 +1,8 @@
 import PostMessage from '../models/postMessage.js';
-//import { getPosts, createPost } from '.../controllers/posts.js';
 
 export const getPosts = async (req, res) => {
     try {
-        const portMessage = await PostMessage.find();
+        const postMessage = await PostMessage.find();
 
         console.log(postMessage);
 
@@ -14,6 +13,16 @@ export const getPosts = async (req, res) => {
     }
 }
 
-export const createPost = (req, res) => {
-    res.send('Post Creation');
+export const createPost = async (req, res) => {
+        const post = req.body;
+
+        const newPost = new PostMessage(post);
+    try {
+        await newPost.save();
+
+        res.staus(201).json(newPost);
+    } catch(error) {
+        res.status(40).json({ message: error.message });
+
+    }
 }
