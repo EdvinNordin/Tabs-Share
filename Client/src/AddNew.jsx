@@ -1,6 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { backendURL } from "./main"
 
 export default function AddNew() {
     const [name, setName] = useState('')
@@ -36,7 +37,7 @@ export default function AddNew() {
             tab: tab
         }
 
-        axios.post('http://localhost:3000/api/post/', Object)
+        axios.post(backendURL + 'api/post/', Object)
             .then((response) => {
                 navigate('/items')
             })
@@ -51,7 +52,7 @@ export default function AddNew() {
             <div className='flex flex-row mt-5 justify-between'>
                 <p className='text-5xl pl-2'>Add a song!</p>
                 <div className="">
-                    <Link to="/items" className='text-5xl'>🔙</Link>
+                    <Link to="/" className='text-5xl'>🔙</Link>
                 </div>
             </div>
 
@@ -81,7 +82,6 @@ export default function AddNew() {
                         <textarea
                             ref={textareaRef}
                             value={tab}
-                            //onChange={handleTabChange}
                             onChange={(e) => setTab(e.target.value)}
                             type="text"
                             placeholder="Tabulature"
@@ -96,14 +96,4 @@ export default function AddNew() {
             </form>
         </div>
     )
-}
-
-function Items() {
-    return (
-        <div className="">
-            <h1>
-                <Link to="/items">Click here to see the items.</Link>
-            </h1>
-        </div>
-    );
 }

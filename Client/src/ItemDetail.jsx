@@ -1,11 +1,10 @@
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { backendURL } from "./main"
 
 export default function ItemDetail() {
     const { id } = useParams();
-    const navigate = useNavigate();
-    let location = useLocation()
     const [item, setItem] = useState(null);
     const [name, setName] = useState('');
     const [artist, setArtist] = useState('');
@@ -13,15 +12,13 @@ export default function ItemDetail() {
     const textareaRef = useRef(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/get/${id}`)
+        axios.get(backendURL + `get/${id}`)
             .then((response) => {
                 const fetchedItem = response.data;
                 setItem(fetchedItem);
                 setName(fetchedItem.name);
                 setArtist(fetchedItem.artist);
                 setTab(fetchedItem.tab);
-
-                //adjustTextareaHeight();
             })
             .catch((error) => {
                 console.error('There was an error fetching the item!', error);
@@ -33,12 +30,6 @@ export default function ItemDetail() {
             adjustTextareaHeight();
         }
     }, [tab]);
-    const handleUnload = (e) => {
-        const message = "o/";
-        return message;
-    };
-
-
 
     const adjustTextareaHeight = () => {
         const textarea = textareaRef.current;
@@ -68,14 +59,13 @@ export default function ItemDetail() {
     }
 
     const updateEvent = (name, artist, tab) => {
-        //e.preventDefault();
         const updatedItem = {
             name: name,
             artist: artist,
             tab: tab
         };
 
-        axios.patch(`http://localhost:3000/api/update/${id}`, updatedItem)
+        axios.patch(backendURL + `update/${id}`, updatedItem)
             .then((response) => {
                 setItem(response.data);
             })
@@ -83,7 +73,6 @@ export default function ItemDetail() {
                 console.error('There was an error updating the item!', error);
             });
     };
-
 
     return (
         <div className="w-full h-full flex flex-col m-10 mt-3">
@@ -101,7 +90,7 @@ export default function ItemDetail() {
                 </div>
 
                 <div className="mt-5">
-                    <Link to="/items" className='text-5xl'>🔙</Link>
+                    <Link to="/" className='text-5xl'>🔙</Link>
                 </div>
             </div>
 

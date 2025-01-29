@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { backendURL } from "./main"
 import axios from 'axios';
-export function Itemlist() {
+
+export default function Itemlist() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/getAll')
+        axios.get(backendURL + 'getAll')
             .then((response) => {
                 setItems(response.data);
             })
@@ -15,7 +17,7 @@ export function Itemlist() {
     }, []);
 
     const deleteEvent = (id) => {
-        axios.delete(`http://localhost:3000/api/delete/${id}`)
+        axios.delete(backendUR + `delete/${id}`)
             .then((response) => {
                 setItems(items.filter(item => item._id !== id));
             })
@@ -30,7 +32,7 @@ export function Itemlist() {
         <div className='w-full h-full'>
             <div className='flex flex-row'>
                 <NewItem />
-                <Home />
+                {/*<Home />*/}
             </div>
             <div className="ml-10">
                 <div className="grid grid-cols-5 gap-1">
