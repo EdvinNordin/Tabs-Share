@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 
 //Post Method
 router.post("/post", async (req, res) => {
-  //console.log(req.body)
   const data = new Model({
     name: req.body.name,
     artist: req.body.artist,

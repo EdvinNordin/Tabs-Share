@@ -26,22 +26,18 @@ export default function TabsList() {
             });
     };
 
-
-
     return (
         <div className='w-full h-full'>
             <div className='flex flex-row'>
                 <NewItem />
-                {/*<Home />*/}
             </div>
             <div className="ml-10">
-                <div className="grid grid-cols-5 gap-1">
+                <div className="grid grid-cols-6 gap-1">
                     {items.map((item) => (
                         <div key={item._id} className="m-4">
                             <Link key={item._id} to={`./${item._id}`} onClick={() => { }}>
                                 <h2 className="text-xl font-bold">{item.name}</h2>by
                                 <h3 className="text-lg">{item.artist}</h3>
-
                             </Link>
                             <button onClick={() => deleteEvent(item._id)} className="bg-yellow-500 text-white p-2 mt-2">Delete</button>
                         </div>
@@ -52,23 +48,12 @@ export default function TabsList() {
     );
 }
 
-
 function NewItem() {
     return (
         <div className='mt-10 ml-13'>
             <Link to="/new">
                 <button className='size-fit'>Add new item</button>
             </Link>
-        </div>
-    );
-}
-
-function Home() {
-    return (
-        <div className="ml-auto m-5">
-            <h1>
-                <Link to="/">🏠</Link>
-            </h1>
         </div>
     );
 }
