@@ -17,7 +17,7 @@ export default function Itemlist() {
     }, []);
 
     const deleteEvent = (id) => {
-        axios.delete(backendUR + `delete/${id}`)
+        axios.delete(backendURL + `delete/${id}`)
             .then((response) => {
                 setItems(items.filter(item => item._id !== id));
             })

@@ -37,9 +37,9 @@ export default function AddNew() {
             tab: tab
         }
 
-        axios.post(backendURL + 'api/post/', Object)
+        axios.post(backendURL + 'post/', Object)
             .then((response) => {
-                navigate('/items')
+                navigate('/')
             })
             .catch((error) => {
                 console.error('There was an error adding the item!', error);
