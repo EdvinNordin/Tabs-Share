@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Itemlist from './Items';
-import ItemDetail from './ItemDetail'; // Import the new component
-import AddNew from './AddNew'; // Import the new component
+import TabsList from './TabsList';
+import EditTab from './EditTab';
+import NewTab from './NewTab';
 import './index.css'
 
 //export const backendURL = 'http://localhost:3000/api/'
@@ -14,10 +14,9 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <div className="flex">
         <Routes>
-          {/*<Route path="/" element={<Home />} />*/}
-          <Route path="/" element={<Itemlist />} />
-          <Route path="/:id" element={<ItemDetail />} />
-          <Route path="/new" element={<AddNew />} />
+          <Route path="/" element={<TabsList />} />
+          <Route path="/:id" element={<EditTab />} />
+          <Route path="/new" element={<NewTab />} />
         </Routes>
       </div>
     </BrowserRouter>

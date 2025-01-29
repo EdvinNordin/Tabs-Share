@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { backendURL } from "./main"
 
-export default function ItemDetail() {
+export default function EditTab() {
     const { id } = useParams();
     const [item, setItem] = useState(null);
     const [name, setName] = useState('');
@@ -76,23 +76,23 @@ export default function ItemDetail() {
 
     return (
         <div className="w-full h-full flex flex-col m-10 mt-3">
-
             <div className='flex flex-row justify-between'>
-                <div className="flex mt-5 text-4xl w-full">
-                    <input
-                        value={name}
-                        onChange={handleSongChange}
-                        type="text"
-                        placeholder="Song name"
-                        required
-                        className="w-full h-15"
-                    />
-                </div>
-
+                <h1 className='font-bold'>Edit the tab</h1>
                 <div className="mt-5">
                     <Link to="/" className='text-5xl'>🔙</Link>
                 </div>
             </div>
+            <div className="flex mt-5 text-4xl w-full">
+                <input
+                    value={name}
+                    onChange={handleSongChange}
+                    type="text"
+                    placeholder="Song name"
+                    required
+                    className="w-full h-15"
+                />
+            </div>
+
 
             <div className="flex text-2xl">
                 <p>By&nbsp;</p>

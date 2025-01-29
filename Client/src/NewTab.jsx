@@ -1,9 +1,9 @@
+import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import { backendURL } from "./main"
 
-export default function AddNew() {
+export default function NewTab() {
     const [name, setName] = useState('')
     const [artist, setArtist] = useState('')
     const [tab, setTab] = useState('')
@@ -50,7 +50,7 @@ export default function AddNew() {
         <div className="w-full h-full flex flex-col mx-10 mt-3">
 
             <div className='flex flex-row mt-5 justify-between'>
-                <p className='text-5xl pl-2'>Add a song!</p>
+                <h1 className='font-bold'>Add a song</h1>
                 <div className="">
                     <Link to="/" className='text-5xl'>🔙</Link>
                 </div>

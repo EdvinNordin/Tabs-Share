@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { backendURL } from "./main"
 import axios from 'axios';
 
-export default function Itemlist() {
+export default function TabsList() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
