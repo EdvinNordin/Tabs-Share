@@ -1,48 +1,81 @@
-import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-function ItemDetail() {
+export default function ItemDetail() {
     const { id } = useParams();
+    const navigate = useNavigate();
+    let location = useLocation()
     const [item, setItem] = useState(null);
     const [name, setName] = useState('');
     const [artist, setArtist] = useState('');
-    const [formData, setFormData] = useState({
-        name: '',
-        artist: '',
-        tab: ''
-    });
     const [tab, setTab] = useState('');
+    const textareaRef = useRef(null);
+
     useEffect(() => {
         axios.get(`http://localhost:3000/api/get/${id}`)
             .then((response) => {
-                setItem(response.data);
+                const fetchedItem = response.data;
+                setItem(fetchedItem);
+                setName(fetchedItem.name);
+                setArtist(fetchedItem.artist);
+                setTab(fetchedItem.tab);
+
+                //adjustTextareaHeight();
             })
             .catch((error) => {
                 console.error('There was an error fetching the item!', error);
             });
     }, [id]);
 
+    useEffect(() => {
+        if (textareaRef.current) {
+            adjustTextareaHeight();
+        }
+    }, [tab]);
+    const handleUnload = (e) => {
+        const message = "o/";
+        return message;
+    };
+
+
+
+    const adjustTextareaHeight = () => {
+        const textarea = textareaRef.current;
+        if (textarea && textarea.style.height !== `${textarea.scrollHeight}px`) {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        }
+    };
+
+    const handleSongChange = (e) => {
+        setName(e.target.value);
+        updateEvent(e.target.value, artist, tab);
+    };
+
+    const handleArtistChange = (e) => {
+        setArtist(e.target.value);
+        updateEvent(name, e.target.value, tab);
+    };
+
+    const handleTabChange = (e) => {
+        setTab(e.target.value);
+        updateEvent(name, artist, e.target.value);
+    };
+
     if (!item) {
         return <p>Loading...</p>;
     }
 
-    const formattedTab = item.tab.replace(/\| /g, '|\n');
-    const formattedTab2 = formattedTab.replace(/\ e/g, '\ne');
-
-    // Remove everything between each occurrence of '\n' and 'e|'
-    const updateEvent = (e) => {
-        e.preventDefault();
-        const testObject = {
+    const updateEvent = (name, artist, tab) => {
+        //e.preventDefault();
+        const updatedItem = {
             name: name,
             artist: artist,
             tab: tab
         };
-        if (testObject.name === '') testObject.name = (item.name);
-        if (testObject.artist === '') testObject.artist = (item.artist);
-        if (testObject.tab === '') testObject.tab = (item.tab);
 
-        axios.patch(`http://localhost:3000/api/update/${id}`, testObject)
+        axios.patch(`http://localhost:3000/api/update/${id}`, updatedItem)
             .then((response) => {
                 setItem(response.data);
             })
@@ -50,62 +83,50 @@ function ItemDetail() {
                 console.error('There was an error updating the item!', error);
             });
     };
-    // Add a newline after every '| '
+
 
     return (
-        <div className="w-full h-full flex items-center">
-            <h1 className="fixed text-center top-0 left-0 w-full p-4 center z-10">
-                <Link to="/items">Back to Items</Link>
-            </h1>
+        <div className="w-full h-full flex flex-col m-10 mt-3">
 
-            <div className="container flex-col items-center w-full p-10 ">
-                <form onSubmit={updateEvent} className="mb-4">
-                    <div className='flex pb-50'>
-                        <div className='w-1/2'>
-                            <div className='flex w-full'>
-                                <input
-                                    type="text"
-                                    placeholder={item.name.toString()}
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="border rounded-md w-1/2 p-2 mr-4"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder={item.artist.toString()}
-                                    value={artist}
-                                    onChange={(e) => setArtist(e.target.value)}
-                                    className="border rounded-md w-1/2 p-2 ml-4"
-                                />
-                            </div>
-                            <textarea
-                                placeholder={item.tab.toString()}
-                                value={tab}
-                                onChange={(e) => setTab(e.target.value)}
-                                className="border w-full h-full rounded-md p-2 my-5 mr-5"
-                            />
-                            <div className="flex justify-center">
-                                <button type="submit" className="bg-blue-500 text-white p-2">Update</button>
+            <div className='flex flex-row justify-between'>
+                <div className="flex mt-5 text-4xl w-full">
+                    <input
+                        value={name}
+                        onChange={handleSongChange}
+                        type="text"
+                        placeholder="Song name"
+                        required
+                        className="w-full h-15"
+                    />
+                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <div className="">
-                    <div>
-                        <h2 className="text-xl font-bold">{"Song name: \n" + item.name}</h2>
-                        <h3 className="text-lg">{"Artist: \n" + item.artist}</h3>
-                    </div>
-                    <div>
-                        <pre className="whitespace-pre-wrap p-4 rounded">
-                            {"Tab: \n" + formattedTab2}
-                        </pre>
-                    </div>
+                <div className="mt-5">
+                    <Link to="/items" className='text-5xl'>🔙</Link>
                 </div>
             </div>
 
-        </div >
+            <div className="flex text-2xl">
+                <p>By&nbsp;</p>
+                <input
+                    value={artist}
+                    onChange={handleArtistChange}
+                    type="text"
+                    placeholder="Artist"
+                    required
+                    className="w-full"
+                />
+            </div>
+
+            <div className="flex my-5 mr-5">
+                <textarea
+                    ref={textareaRef}
+                    value={tab}
+                    onChange={handleTabChange}
+                    placeholder="Tabulature"
+                    required
+                    className="flex w-full mt-0 p-2 font-mono overflow-hidden"
+                />
+            </div>
+        </div>
     );
 }
-export default ItemDetail;
