@@ -78,7 +78,7 @@ export default function EditTab() {
         <div className="w-full h-full flex flex-col m-10 mt-3">
             <div className='flex flex-row justify-between'>
                 <h1 className='font-bold'>Edit the tab</h1>
-                <div className="mt-5">
+                <div className="fixed right-5 mt-5">
                     <Link to="/" className='text-5xl'>🔙</Link>
                 </div>
             </div>

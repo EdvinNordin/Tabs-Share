@@ -31,18 +31,18 @@ export default function TabsList() {
             <div className='flex flex-row'>
                 <NewItem />
             </div>
-            <div className="ml-10">
-                <div className="grid grid-cols-6 gap-1">
-                    {items.map((item) => (
-                        <div key={item._id} className="m-4">
+            <div className="ml-10 mt-40 grid grid-cols-6 gap-1">
+                {items.map((item) => (
+                    <div key={item._id} className="flex flex-col m-4 justify-between">
+                        <div>
                             <Link key={item._id} to={`./${item._id}`} onClick={() => { }}>
-                                <h2 className="text-xl font-bold">{item.name}</h2>by
-                                <h3 className="text-lg">{item.artist}</h3>
+                                <h2 className="text-3xl font-bold">{item.name}</h2>by
+                                <h3 className="text-2xl">{item.artist}</h3>
                             </Link>
-                            <button onClick={() => deleteEvent(item._id)} className="bg-yellow-500 text-white p-2 mt-2">Delete</button>
                         </div>
-                    ))}
-                </div>
+                        <button onClick={() => deleteEvent(item._id)} className="text-white p-2 mt-2 w-1/3">Delete</button>
+                    </div>
+                ))}
             </div>
         </div>
     );
@@ -50,9 +50,9 @@ export default function TabsList() {
 
 function NewItem() {
     return (
-        <div className='mt-10 ml-13'>
+        <div className='my-10 mr-8 text-2xl fixed right-5'>
             <Link to="/new">
-                <button className='size-fit'>Add new item</button>
+                <button className='size-fit'>Add new tab</button>
             </Link>
         </div>
     );

@@ -52,7 +52,7 @@ export default function NewTab() {
             <div className='flex flex-row mt-5 justify-between'>
                 <h1 className='font-bold'>Add a song</h1>
                 <div className="">
-                    <Link to="/" className='text-5xl'>🔙</Link>
+                    <Link to="/" className='text-5xl fixed right-5'>🔙</Link>
                 </div>
             </div>
 
@@ -64,9 +64,9 @@ export default function NewTab() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 type="text"
-                                placeholder="Song name"
+                                placeholder="Name"
                                 required
-                                className=" w-1/2 p-2 mr-4"
+                                className="w-1/2 p-2 mr-4"
                             />
                             <input
                                 value={artist}
@@ -78,7 +78,7 @@ export default function NewTab() {
                             />
                         </div>
                     </div>
-                    <div className='flex flex-row pb-10'>
+                    <div className='flex flex-row pb-10 mt-2'>
                         <textarea
                             ref={textareaRef}
                             value={tab}
@@ -88,8 +88,8 @@ export default function NewTab() {
                             required
                             className="w-1/2 p-2 ty-5 mr-5"
                         />
-                        <div className="flex items-end">
-                            <button type="submit" className="bg-blue-500 text-white p-2">Add Item</button>
+                        <div className="flex items-end mb-3">
+                            <button type="submit" className="bg-blue-500 text-white p-2 size-fit">Add Item</button>
                         </div>
                     </div>
                 </div>
