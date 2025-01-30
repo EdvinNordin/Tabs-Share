@@ -40,7 +40,7 @@ export default function TabsList() {
                                 <h3 className="text-2xl">{item.artist}</h3>
                             </Link>
                         </div>
-                        <button onClick={() => deleteEvent(item._id)} className="text-white p-2 mt-2 w-1/3">Delete</button>
+                        <button onClick={() => deleteEvent(item._id)} className="text-white mt-2 w-1/3">Delete</button>
                     </div>
                 ))}
             </div>

@@ -50,7 +50,7 @@ export default function NewTab() {
         <div className="w-full h-full flex flex-col mx-10 mt-3">
 
             <div className='flex flex-row mt-5 justify-between'>
-                <h1 className='font-bold'>Add a song</h1>
+                <h1 className='font-bold text-purp'>Add a song</h1>
                 <div className="">
                     <Link to="/" className='text-5xl fixed right-5'>🔙</Link>
                 </div>
@@ -66,7 +66,7 @@ export default function NewTab() {
                                 type="text"
                                 placeholder="Name"
                                 required
-                                className="w-1/2 p-2 mr-4"
+                                className="w-1/2 p-2 mr-4 rounded-2xl  focus:outline outline-purp"
                             />
                             <input
                                 value={artist}
@@ -74,7 +74,7 @@ export default function NewTab() {
                                 type="text"
                                 placeholder="Artist"
                                 required
-                                className="w-1/2 p-2 ml-4"
+                                className="w-1/2 p-2 ml-4 rounded-2xl focus:outline outline-purp"
                             />
                         </div>
                     </div>
@@ -86,7 +86,7 @@ export default function NewTab() {
                             type="text"
                             placeholder="Tabulature"
                             required
-                            className="w-1/2 p-2 ty-5 mr-5"
+                            className="w-1/2 p-2 ty-5 mr-5 rounded-2xl focus:outline outline-purp"
                         />
                         <div className="flex items-end mb-3">
                             <button type="submit" className="bg-blue-500 text-white p-2 size-fit">Add Item</button>

@@ -77,32 +77,31 @@ export default function EditTab() {
     return (
         <div className="w-full h-full flex flex-col m-10 mt-3">
             <div className='flex flex-row justify-between'>
-                <h1 className='font-bold'>Edit the tab</h1>
+                <h1 className='font-bold text-purp'>Edit the tab</h1>
                 <div className="fixed right-5 mt-5">
                     <Link to="/" className='text-5xl'>🔙</Link>
                 </div>
             </div>
-            <div className="flex mt-5 text-4xl w-full">
+            <div className="flex mt-5 mb-1 text-4xl w-1/2">
                 <input
                     value={name}
                     onChange={handleSongChange}
                     type="text"
                     placeholder="Song name"
                     required
-                    className="w-full h-15"
+                    className="w-full h-15 rounded-2xl pl-2 focus:outline outline-purp"
                 />
             </div>
 
-
-            <div className="flex text-2xl">
-                <p>By&nbsp;</p>
+            <div className="flex text-2xl w-1/2">
+                <p className='ml-2 mt-1'>By&nbsp;</p>
                 <input
                     value={artist}
                     onChange={handleArtistChange}
                     type="text"
                     placeholder="Artist"
                     required
-                    className="w-full"
+                    className="w-full rounded-2xl p-1 pl-2 test focus:outline outline-purp"
                 />
             </div>
 
@@ -113,7 +112,7 @@ export default function EditTab() {
                     onChange={handleTabChange}
                     placeholder="Tabulature"
                     required
-                    className="flex w-full mt-0 p-2 font-mono overflow-hidden"
+                    className="flex w-full mt-0 p-2 font-mono overflow-hidden rounded-2xl focus:outline outline-purp"
                 />
             </div>
         </div>
