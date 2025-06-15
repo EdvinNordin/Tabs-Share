@@ -39,14 +39,14 @@ export default function TabsList() {
             <div className='flex flex-row'>
                 <NewItem />
             </div>
+            <div>
+                {!isBackendConnected && (
+                    <div classBane='text-3xl font-bold'>
+                      Please wait a little for the backend server to start up.
+                    </div>
+                  )}
+            </div>
             <div className="ml-10 mt-40 grid grid-cols-6 gap-1">
-                 <div>
-      {!isBackendConnected && (
-        <div style={{ color: 'red', marginBottom: '1em' }}>
-          Backend is not connected!
-        </div>
-      )}
-    </div>
                 {items.map((item) => (
                     <div key={item._id} className="flex flex-col m-4 justify-between">
                         <div>
