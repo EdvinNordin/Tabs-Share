@@ -9,7 +9,7 @@ export default function TabsList() {
 
   useEffect(() => {
     // Replace with your backend endpoint
-    axios.get('/api/healthcheck')
+    axios.get(backendURL + 'getAll')
       .then(() => setIsBackendConnected(true))
       .catch(() => setIsBackendConnected(false));
   }, []);
